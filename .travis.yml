@@ -2,3 +2,14 @@ language: node_js
 node_js:
   - 0.6
   - 0.8
+
+env:
+  global:
+    - secure: "EQyBrCopaG18FRKBQq5hAt8MFlqHH4jw7JRcc0gCZsFsa3YSsNhnCFoiwvFE\n+Hln5pU0B3/qqYZDjoLKOaYr7yR8gCScOhM0ysZu7pWiv3cLeUA4+7wI8Q/C\n6xtChaD6nHA/1nShA8gr2tYlFQZLACqTYNdE2+oMDcM4sWoqZY8="
+
+after_script:
+  - gem install heroku
+  - yes | ruby travis_deployer.rb
+  - heroku keys:clear
+  - yes | heroku keys:add
+  - git push heroku master
