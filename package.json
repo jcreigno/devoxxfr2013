@@ -1,27 +1,28 @@
 {
-    "name": "devoxxfr2013",
-    "description": "code story contest.",
-    "version": "0.0.1",
-    "author": {
-        "name" : "jerome creignou",
-        "url" : "https://github.com/jcreigno/devoxxfr2013"
-    },
-    "repository" : {
-        "type" : "git",
-        "url" : "git://github.com/jcreigno/devoxxfr2013.git"
-    },
-    "dependencies": {
-    },
-    "main": "./index.js",
-    "directories": {
-    },
-    "engines": {
-	"node": "0.8.x",
-    	"npm":  "1.1.x"
-    },
-    "devDependencies": {
-    },
-    "scripts":{
-        "start" : "node index.js"
-    }
+  "name": "devoxxfr2013",
+  "description": "code story contest.",
+  "version": "0.0.1",
+  "author": {
+    "name": "jerome creignou",
+    "url": "https://github.com/jcreigno/devoxxfr2013"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jcreigno/devoxxfr2013.git"
+  },
+  "dependencies": {},
+  "main": "./index.js",
+  "directories": {},
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  },
+  "devDependencies": {
+    "vows": "~0.7.0",
+    "request": "~2.12.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "vows --spec test/*"
+  }
 }
