@@ -16,7 +16,8 @@
     "directories": {
     },
     "engines": {
-        "node": ">=0.3.0"
+	"node": "0.8.x",
+    	"npm":  "1.1.x"
     },
     "devDependencies": {
     },
