@@ -43,7 +43,7 @@ var routes = {
 
 http.createServer(function(req, res) {
   var u = url.parse(req.url, true);
-  if (routes[req.method]) {
+  if (routes[req.method] && routes[req.method][u.pathname]) {
     routes[req.method][u.pathname](req,res,u);
   }
   else {
