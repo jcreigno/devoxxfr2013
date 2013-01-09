@@ -39,8 +39,8 @@ var routes = {
                 body += data;
             });
             req.on('end', function() {
-                var b = JSON.parse(body);
-                answer(b.q, res);
+                console.log(body);
+                //answer(b.q, res);
             });
         }
     }

@@ -78,9 +78,9 @@ vows.describe('Le serveur "Code Story"').addBatch({
 }).addBatch(createQuestionBatch()).addBatch({
     'reçoit le premier enoncé en post':{
         topic:function() {
-            apiTest.post('/enonce/1', { "q":"As tu bien recu le premier enonce(OUI/NON)"}, this.callback);
+            apiTest.post('/enonce/1', { }, this.callback);
         },
-        'et répond "OUI"': assertResultBody('NON')
+        'et répond "NON"': assertResultBody('NON')
         
     }
 
