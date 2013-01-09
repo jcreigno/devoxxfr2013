@@ -4,7 +4,7 @@ var vows = require('vows')
 
 require('../index');
 
-var apiUrl = 'http://' + (process.env.IP || '') + ':' 
+var apiUrl = 'http://' + (process.env.IP || 'localhost') + ':' 
     + (process.env.PORT || 5000);
 
 var apiTest = {
