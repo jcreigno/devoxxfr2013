@@ -10,7 +10,10 @@
     "type": "git",
     "url": "git://github.com/jcreigno/devoxxfr2013.git"
   },
-  "dependencies": {},
+  "dependencies": {
+    "marked": "~0.2.7",
+    "underscore": "~1.4.3"
+  },
   "main": "./index.js",
   "directories": {},
   "engines": {
