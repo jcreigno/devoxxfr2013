@@ -39,7 +39,27 @@ function assertResultBody(body) {
   };
 }
 
+var questions = {
+    'Quelle est ton adresse email' : 'jerome.creignou@gmail.com',
+    'Es tu abonne a la mailing list(OUI/NON)' : 'OUI',
+    'Es tu heureux de participer(OUI/NON)' : 'OUI',
+    'Es tu pret a recevoir une enonce au format markdown par http post(OUI/NON)' : 'OUI',
+    'Est ce que tu reponds toujours oui(OUI/NON)' : 'NON'
+};
 
+
+function createQuestionBatch(){
+  var batch = {};
+  Object.keys(questions).forEach(function(q){
+    batch['à la question "' + q + '"'] = {
+      topic: function(){
+        apiTest.get('?q='+q, {} ,this.callback);
+      }
+    };
+    batch['à la question "' + q + '"']['il répond "'+questions[q]+'"'] = assertResultBody(questions[q]);
+  });
+  return batch;
+}
 
 vows.describe('Le serveur "Code Story"').addBatch({
   'doit être démarré':{
@@ -48,36 +68,5 @@ vows.describe('Le serveur "Code Story"').addBatch({
     },
     'et répondre un code 200': assertStatus(200),
     'et demande une question' : assertResultBody('Pose une question !')
-  },
-  'à la question "Quelle est ton adresse email"':{
-    topic: function(){
-      apiTest.get('?q=Quelle+est+ton+adresse+email', {} ,this.callback);
-    },
-    'il répond "jerome.creignou" chez "gmail"': assertResultBody('jerome.creignou@gmail.com')
-  },
-  'à la question "Es tu abonne a la mailing list(OUI/NON)"':{
-    topic: function(){
-      apiTest.get('?q=Es+tu+abonne+a+la+mailing+list(OUI/NON)', {} ,this.callback);
-    },
-    'il répond "OUI"': assertResultBody('OUI')
-  },
-  'à la question "Es tu heureux de participer(OUI/NON)"':{
-    topic: function(){
-      apiTest.get('?q=Es+tu+heureux+de+participer(OUI/NON)', {} ,this.callback);
-    },
-    'il répond "OUI"': assertResultBody('OUI')
-  },
-  'Est ce que tu reponds toujours oui(OUI/NON)"':{
-    topic: function(){
-      apiTest.get('?q=Est+ce+que+tu+reponds+toujours+oui(OUI/NON)', {} ,this.callback);
-    },
-    'il répond "NON"': assertResultBody('NON')
-  },
-  'à une question inconnue':{
-    topic: function(){
-      apiTest.get('?q=Esper(OUI/NON)', {} ,this.callback);
-    },
-    'il répond "Je n\'ai pas la réponse à cette question."': 
-        assertResultBody('Je n\'ai pas la réponse à cette question.')
   }
-}).export(module);
+}).addBatch(createQuestionBatch()).export(module);
