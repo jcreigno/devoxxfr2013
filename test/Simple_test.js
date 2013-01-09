@@ -80,7 +80,7 @@ vows.describe('Le serveur "Code Story"').addBatch({
         topic:function() {
             apiTest.post('/enonce/1', { "q":"As tu bien recu le premier enonce(OUI/NON)"}, this.callback);
         },
-        'et répond "OUI"': assertResultBody('OUI')
+        'et répond "OUI"': assertResultBody('NON')
         
     }
 
