@@ -1,5 +1,6 @@
 var http = require('http'),
-  url = require('url');
+  url = require('url'),
+  director = require('director');
 
 var questions = {
   'Quelle est ton adresse email': 'jerome.creignou@gmail.com',
@@ -20,52 +21,38 @@ var answer = function(q, res) {
   }
 }
 
-var routes = {
-  GET: {
-    '/': function(req, res, u) {
-      res.writeHead(200, {
-        'Content-Type': 'text/plain'
-      });
-      if (!u.query.q) {
-        res.end('Pose une question !', 'utf-8');
-        return;
-      }
-      answer(u.query.q, res);
-    }
-  },
-  POST: {
-    '/enonce/1': function(req, res, u, body) {
-      console.log(body);
-      res.end();
-    }
-  }
-};
+var router = new director.http.Router();
 
-var handleRequest = function(req, res, body) {
-  var u = url.parse(req.url, true);
-  if (routes[req.method] && routes[req.method][u.pathname]) {
-    routes[req.method][u.pathname](req, res, u, body);
+router.get('/', function() {
+  var u = url.parse(this.req.url, true);
+  this.res.writeHead(200, {
+    'Content-Type': 'text/plain'
+  });
+  if (!u.query.q) {
+    this.res.end('Pose une question !', 'utf-8');
+    return;
   }
-  else {
-    res.end();
-  }
-};
+  answer(u.query.q, this.res);
+});
+
+router.post('/enonce/:id', function() {
+  console.log(this.req.body);
+  this.res.end();
+});
 
 http.createServer(function(req, res) {
-  if (req.method === 'POST') {
-    var body = '';
-    req.on('data', function(data) {
-      body += data;
-    });
-    req.on('end', function() {
-      handleRequest(req, res, body);
-    });
-  }
-  else {
-    process.nextTick(function() {
-      handleRequest(req, res, body);
-    });
-  }
+  req.chunks = [];
+  req.on('data', function (chunk) {
+    req.chunks.push(chunk.toString());
+  });
+
+  router.dispatch(req, res, function (err) {
+    if (err) {
+      res.writeHead(404);
+      res.end();
+    }
+    console.log('Served ' + req.url);
+  });
 
 }).listen(process.env.PORT || 5000, function() {
   console.log("Listening ...");
