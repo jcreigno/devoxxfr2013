@@ -4,7 +4,7 @@ var vows = require('vows')
 
 require('../index');
 
-var apiUrl = 'http://localhost:5000';
+var apiUrl = 'http://' + process.env.IP + ':' + process.env.PORT;
 
 var apiTest = {
   general: function( method, url, data, cb ){
@@ -45,12 +45,32 @@ vows.describe('Le serveur "Code Story"').addBatch({
     topic: function (){
       apiTest.get('', {} ,this.callback);
     },
-    'et répondre un code 200': assertStatus(200)
+    'et répondre un code 200': assertStatus(200),
+    'et demande une question' : assertResultBody('Pose une question !')
   },
   'à la question "Quelle est ton adresse email"':{
     topic: function(){
       apiTest.get('?q=Quelle+est+ton+adresse+email', {} ,this.callback);
     },
     'il répond "jerome.creignou" chez "gmail"': assertResultBody('jerome.creignou@gmail.com')
+  },
+  'à la question "Es tu abonne a la mailing list(OUI/NON)"':{
+    topic: function(){
+      apiTest.get('?q=Es+tu+abonne+a+la+mailing+list(OUI/NON)', {} ,this.callback);
+    },
+    'il répond "OUI"': assertResultBody('OUI')
+  },
+  'à la question "Es tu heureux de participer(OUI/NON)"':{
+    topic: function(){
+      apiTest.get('?q=Es+tu+heureux+de+participer(OUI/NON)', {} ,this.callback);
+    },
+    'il répond "OUI"': assertResultBody('OUI')
+  },
+  'à une question inconnue':{
+    topic: function(){
+      apiTest.get('?q=Esper(OUI/NON)', {} ,this.callback);
+    },
+    'il répond "Je n\'ai pas la réponse à cette question."': 
+        assertResultBody('Je n\'ai pas la réponse à cette question.')
   }
 }).export(module);
