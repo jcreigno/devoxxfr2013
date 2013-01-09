@@ -76,11 +76,11 @@ vows.describe('Le serveur "Code Story"').addBatch({
         'et demande une question': assertResultBody('Pose une question !')
     }
 }).addBatch(createQuestionBatch()).addBatch({
-    'reçoit le premier enoncé':{
+    'reçoit le premier enoncé en post':{
         topic:function() {
-            apiTest.post('/enonce/1', {}, this.callback);
+            apiTest.post('/enonce/1', { "q":"As tu bien recu le premier enonce(OUI/NON)"}, this.callback);
         },
-        'et répond "bien reçu"': assertResultBody('bien reçu')
+        'et répond "OUI"': assertResultBody('OUI')
         
     }
 
