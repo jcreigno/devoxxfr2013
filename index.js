@@ -17,6 +17,6 @@ http.createServer(function(req,res){
   }else{
     res.end('Je n\'ai pas la réponse à cette question.','utf-8');  
   }
-}).listen(process.env.PORT||5000,process.env.IP||'localhost', 511, function(){
+}).listen(process.env.PORT||5000, function(){
   console.log("Listening ...");
 });
