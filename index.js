@@ -29,13 +29,14 @@ var routes = {
     }
   },
   POST:{
-    'enonce/1': function(req,res,u){
+    '/enonce/1': function(req,res,u){
        var body = '';
         req.on('data', function (data) {
             body += data;
         });
         req.on('end', function () {
             console.log(body);
+            res.end('bien reçu', 'utf-8');
         });
     }
   }
@@ -43,7 +44,7 @@ var routes = {
 
 http.createServer(function(req, res) {
   var u = url.parse(req.url, true);
-  if (routes[req.method] && routes[req.method][u.pathname]) {
+  if (routes[req.method]) {
     routes[req.method][u.pathname](req,res,u);
   }
   else {
