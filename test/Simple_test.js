@@ -69,4 +69,6 @@ vows.describe('Le serveur "Code Story"').addBatch({
     'et répondre un code 200': assertStatus(200),
     'et demande une question' : assertResultBody('Pose une question !')
   }
-}).addBatch(createQuestionBatch()).export(module);
+}).addBatch(createQuestionBatch()).addBatch({
+
+}).export(module);
