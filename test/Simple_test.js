@@ -4,7 +4,8 @@ var vows = require('vows')
 
 require('../index');
 
-var apiUrl = 'http://' + process.env.IP + ':' + process.env.PORT;
+var apiUrl = 'http://' + (process.env.IP || '') + ':' 
+    + (process.env.PORT || 5000);
 
 var apiTest = {
   general: function( method, url, data, cb ){
@@ -65,6 +66,12 @@ vows.describe('Le serveur "Code Story"').addBatch({
       apiTest.get('?q=Es+tu+heureux+de+participer(OUI/NON)', {} ,this.callback);
     },
     'il répond "OUI"': assertResultBody('OUI')
+  },
+  'Est ce que tu reponds toujours oui(OUI/NON)"':{
+    topic: function(){
+      apiTest.get('?q=Est+ce+que+tu+reponds+toujours+oui(OUI/NON)', {} ,this.callback);
+    },
+    'il répond "NON"': assertResultBody('NON')
   },
   'à une question inconnue':{
     topic: function(){
