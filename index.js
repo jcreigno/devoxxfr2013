@@ -1,6 +1,7 @@
 var http = require('http'),
   url = require('url'),
-  director = require('director');
+  director = require('director'),
+  Scalaskel = require('./lib/Scalaskel');
 
 var questions = {
   'Quelle est ton adresse email': 'jerome.creignou@gmail.com',
@@ -34,17 +35,12 @@ router.get('/', function() {
   }
   answer(u.query.q, this.res);
 });
-
+var scalaskel = new Scalaskel();
 router.get('/scalaskel/change/:value', function(value) {
   this.res.writeHead(200, {
     'Content-Type': 'application/json'
   });
-  var result = {msg:'aucune idée pour le moment repasse plus tard !'};
-  if(value==1){
-    result = [{foo:1}];
-  }else if(value == 7){
-    result = [{foo:7},{bar:1}];
-  }
+  var result = scalaskel.change(value);
   var r = JSON.stringify(result);
   console.log('essaye faire le change pour '+value+' : '+r);
   this.res.end(r, 'utf-8');
