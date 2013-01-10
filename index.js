@@ -35,6 +35,7 @@ router.get('/', function() {
   }
   answer(u.query.q, this.res);
 });
+
 var scalaskel = new Scalaskel();
 router.get('/scalaskel/change/:value', function(value) {
   this.res.writeHead(200, {
@@ -42,7 +43,7 @@ router.get('/scalaskel/change/:value', function(value) {
   });
   var result = scalaskel.change(value);
   var r = JSON.stringify(result);
-  console.log('essaye faire le change pour '+value+' : '+r);
+  console.log('Voici les changes posssibles pour %d cents : "%s"', value, r);
   this.res.end(r, 'utf-8');
 });
 
