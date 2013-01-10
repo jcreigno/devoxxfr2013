@@ -19,9 +19,9 @@ var assertChange = function(valeur) {
 // vérifie que la somme de la décomposition
 var assertSum = function(valeur) {
   return function(topic) {
-    topic.forEach(function(t){
+    topic.forEach(function(t) {
       var sum = 0;
-      _.keys(t).forEach(function(k){
+      _.keys(t).forEach(function(k) {
         sum += (Scalaskel[k] * t[k]);
       });
       assert.equal(sum, valeur);
@@ -70,23 +70,50 @@ vows.describe('Les groDessimaux de Scalaskel').addBatch({
   },
   'le change de 11 ': {
     topic: new Scalaskel().change(11),
-    'est "[...]"': assertChange([{"qix":1},{"foo":4,"bar":1},{"foo":11}]),
+    'est "[...]"': assertChange([{
+      "qix": 1
+    }, {
+      "foo": 4,
+      "bar": 1
+    }, {
+      "foo": 11
+    }]),
     'la somme fait bien 11': assertSum(11)
+  },
+  'le change de 19 ': {
+    topic: new Scalaskel().change(19),
+    'est "[...]"': assertChange([{
+      "foo": 1,
+      "bar": 1,
+      "qix": 1
+    }, {
+      "foo": 8,
+      "qix": 1
+    }, {
+      "foo": 5,
+      "bar": 2
+    }, {
+      "foo": 12,
+      "bar": 1
+    }, {
+      "foo": 19
+    }]),
+    'la somme fait bien 19': assertSum(19)
   }
-//  ,
-//  'le change de 21 ': {
-//    topic: new Scalaskel().change(21),
-//    'est "[ {"foo": 7}, {"bar": 1} ]"': assertChange([{
-//      "foo": 3,
-//      "bar": 1,
-//      "qix": 1
-//    }, {
-//      "foo": 10,
-//      "qix": 1
-//    }, {
-//      "bar": 3
-//    }, {
-//      "foo": 21
-//    }])
-//  }
+  //  ,
+  //  'le change de 21 ': {
+  //    topic: new Scalaskel().change(21),
+  //    'est "[ {"foo": 7}, {"bar": 1} ]"': assertChange([{
+  //      "foo": 3,
+  //      "bar": 1,
+  //      "qix": 1
+  //    }, {
+  //      "foo": 10,
+  //      "qix": 1
+  //    }, {
+  //      "bar": 3
+  //    }, {
+  //      "foo": 21
+  //    }])
+  //  }
 }).export(module);
