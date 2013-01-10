@@ -45,7 +45,7 @@ router.get('/scalaskel/change/:value', function(value) {
   }else if(value == 7){
     result = [{foo:7},{bar:1}];
   }
-  var r = JSON.stringity(result);
+  var r = JSON.stringify(result);
   console.log('essaye faire le change pour '+value+' : '+r);
   this.res.end(r, 'utf-8');
 });
