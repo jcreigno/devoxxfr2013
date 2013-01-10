@@ -35,6 +35,22 @@ router.get('/', function() {
   answer(u.query.q, this.res);
 });
 
+router.get('/scalaskel/change/:value', function(value) {
+  this.res.writeHead(200, {
+    'Content-Type': 'application/json'
+  });
+  var result = {msg:'aucune idée pour le moment repasse plus tard !'};
+  if(value==1){
+    result = [{foo:1}];
+  }else if(value == 7){
+    result = [{foo:7},{bar:1}];
+  }
+  var r = JSON.stringity(result);
+  console.log('essaye faire le change pour '+value+' : '+r);
+  this.res.end(r, 'utf-8');
+});
+
+
 router.post('/enonce/:id', function() {
   console.log(this.req.body);
   this.res.end();
