@@ -67,6 +67,11 @@ vows.describe('Les groDessimaux de Scalaskel').addBatch({
       "foo": 7
     }]),
     'la somme fait bien 7': assertSum(7)
+  },
+  'le change de 11 ': {
+    topic: new Scalaskel().change(11),
+    'est "[...]"': assertChange([{"qix":1},{"foo":4,"bar":1},{"foo":11}]),
+    'la somme fait bien 11': assertSum(11)
   }
 //  ,
 //  'le change de 21 ': {
