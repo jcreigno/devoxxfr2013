@@ -99,21 +99,29 @@ vows.describe('Les groDessimaux de Scalaskel').addBatch({
       "foo": 19
     }]),
     'la somme fait bien 19': assertSum(19)
+  },
+  'le change de 21 ': {
+    topic: new Scalaskel().change(21),
+    'est "[ {"foo": 7}, {"bar": 1} ]"': assertChange([{
+      "baz": 1
+    }, {
+      "foo": 3,
+      "bar": 1,
+      "qix": 1
+    }, {
+      "foo": 10,
+      "qix": 1
+    }, {
+      "bar": 3
+    }, {
+      "foo": 7,
+      "bar": 2
+    }, {
+      "foo": 14,
+      "bar": 1
+    }, {
+      "foo": 21
+    }]),
+    'la somme fait bien 21': assertSum(21)
   }
-  //  ,
-  //  'le change de 21 ': {
-  //    topic: new Scalaskel().change(21),
-  //    'est "[ {"foo": 7}, {"bar": 1} ]"': assertChange([{
-  //      "foo": 3,
-  //      "bar": 1,
-  //      "qix": 1
-  //    }, {
-  //      "foo": 10,
-  //      "qix": 1
-  //    }, {
-  //      "bar": 3
-  //    }, {
-  //      "foo": 21
-  //    }])
-  //  }
 }).export(module);
