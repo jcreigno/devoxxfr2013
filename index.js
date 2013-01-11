@@ -1,6 +1,7 @@
 var http = require('http'),
   url = require('url'),
   director = require('director'),
+  Parser = require('./lib/Parser').Parser,
   Scalaskel = require('./lib/Scalaskel');
 
 var questions = {
@@ -22,15 +23,7 @@ var answer = function(q, res) {
 }
 
 var compte = function(match) {
-  var left = parseInt(match[1], 10);
-  var right = parseInt(match[3], 10);
-  switch (match[2]) {
-    case ' ': return (left + right);
-    case '-': return (left - right);
-    case '*': return (left * right);
-    case '/': return (left / right);
-  }
-  return 0;
+  return Parser.evaluate(match,{});
 }
 
 var router = new director.http.Router();
@@ -44,9 +37,9 @@ router.get('/', function() {
     this.res.end('Pose une question !', 'utf-8');
     return;
   }
-  var match = /^([0-9]*)([ \-*\/])([0-9]*)$/.exec(u.query.q);
+  var match = /[0-9]/.exec(u.query.q);
   if(match){
-    this.res.end(''+compte(match), 'utf-8');
+    this.res.end(''+compte(u.query.q.replace(' ','+')), 'utf-8');
     return;
   }
   answer(u.query.q, this.res);
