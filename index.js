@@ -63,7 +63,7 @@ router.post('/enonce/:id', function() {
   this.res.end();
 });
 
-http.createServer(function(req, res) {
+var server = http.createServer(function(req, res) {
   req.chunks = [];
   req.on('data', function(chunk) {
     req.chunks.push(chunk.toString());
@@ -80,3 +80,5 @@ http.createServer(function(req, res) {
 }).listen(process.env.PORT || 5000, function() {
   console.log("Listening ...");
 });
+
+module.exports=server;

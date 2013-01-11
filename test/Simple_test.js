@@ -2,7 +2,7 @@ var vows = require('vows'),
   request = require('request'),
   assert = require('assert');
 
-require('../index');
+var server = require('../index');
 
 var apiUrl = 'http://' + (process.env.IP || 'localhost') + ':' + (process.env.PORT || 5000);
 
@@ -98,7 +98,12 @@ vows.describe('Le serveur "Code Story"').addBatch({
     topic: function() {
       apiTest.post('/enonce/1', "super secret markdown.", this.callback);
     },
-    'et ne répond rien': assertEmptyBody()
+    'et ne répond rien': assertEmptyBody(),
+    teardown: function () {
+	server.close(function(){
+		console.log('server closed');
+	});
+    }
 
   }
 
