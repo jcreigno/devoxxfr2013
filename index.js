@@ -9,14 +9,14 @@ var questions = {
   'Es tu heureux de participer(OUI/NON)': 'OUI',
   'Es tu pret a recevoir une enonce au format markdown par http post(OUI/NON)': 'OUI',
   'Est ce que tu reponds toujours oui(OUI/NON)': 'NON',
-  'As tu bien recu le premier enonce(OUI/NON)': 'OUI'
+  'As tu bien recu le premier enonce(OUI/NON)': 'OUI',
+  '1 1': '2'
 };
 
 var answer = function(q, res) {
   if (questions[q]) {
     res.end(questions[q], 'utf-8');
-  }
-  else {
+  } else {
     console.log(q);
     res.end('Je n\'ai pas la réponse à cette question.', 'utf-8');
   }
@@ -55,11 +55,11 @@ router.post('/enonce/:id', function() {
 
 http.createServer(function(req, res) {
   req.chunks = [];
-  req.on('data', function (chunk) {
+  req.on('data', function(chunk) {
     req.chunks.push(chunk.toString());
   });
 
-  router.dispatch(req, res, function (err) {
+  router.dispatch(req, res, function(err) {
     if (err) {
       res.writeHead(404);
       res.end();

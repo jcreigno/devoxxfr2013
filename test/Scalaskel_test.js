@@ -123,5 +123,9 @@ vows.describe('Les groDessimaux de Scalaskel').addBatch({
       "foo": 21
     }]),
     'la somme fait bien 21': assertSum(21)
+  },
+  'le change de 47 ': {
+    topic: new Scalaskel().change(47),
+    'la somme des chacune des décomposition fait bien 47': assertSum(47)
   }
 }).export(module);
