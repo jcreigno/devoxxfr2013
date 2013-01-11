@@ -43,7 +43,7 @@ router.get('/scalaskel/change/:value', function(value) {
   });
   var result = scalaskel.change(value);
   var r = JSON.stringify(result);
-  console.log('Voici les changes posssibles pour %d cents : "%s"', value, r);
+  //console.log('Voici les changes posssibles pour %d cents : "%s"', value, r);
   this.res.end(r, 'utf-8');
 });
 
