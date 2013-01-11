@@ -10,8 +10,6 @@ var questions = {
   'Es tu pret a recevoir une enonce au format markdown par http post(OUI/NON)': 'OUI',
   'Est ce que tu reponds toujours oui(OUI/NON)': 'NON',
   'As tu bien recu le premier enonce(OUI/NON)': 'OUI',
-  '1 1': '2',
-  '2 2': '4'
 };
 
 var answer = function(q, res) {
@@ -34,6 +32,11 @@ router.get('/', function() {
     this.res.end('Pose une question !', 'utf-8');
     return;
   }
+  var op = /^([0-9]*) ([0-9]*)$/.exec(u.query.q);
+  if(op){
+    this.res.end(''+(parseInt(op[1], 10) + parseInt(op[2], 10)), 'utf-8');
+    return;
+  }
   answer(u.query.q, this.res);
 });
 
@@ -50,6 +53,7 @@ router.get('/scalaskel/change/:value', function(value) {
 
 
 router.post('/enonce/:id', function() {
+  this.res.writeHead(201);
   console.log(this.req.body);
   this.res.end();
 });
