@@ -61,7 +61,13 @@ var questions = {
   'Est ce que tu reponds toujours oui(OUI/NON)': 'NON',
   'As tu bien recu le premier enonce(OUI/NON)': 'OUI',
   '1 1': '2',
-  '2 2': '4'
+  '2 2': '4',
+  '1-1': '0',
+  '2-2': '0',
+  '1*1': '1',
+  '3*3': '9',
+  '1/1': '1',
+  '3/3': '1'
 };
 
 
