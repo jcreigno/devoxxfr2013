@@ -20,11 +20,11 @@ var answer = function(q, res) {
     console.log(q);
     res.end('Je n\'ai pas la réponse à cette question.', 'utf-8');
   }
-}
+};
 
 var compte = function(match) {
-  return Parser.evaluate(match,{});
-}
+  return Parser.evaluate(match, {});
+};
 
 var router = new director.http.Router();
 
@@ -38,8 +38,9 @@ router.get('/', function() {
     return;
   }
   var match = /[0-9]/.exec(u.query.q);
-  if(match){
-    this.res.end(''+compte(u.query.q.replace(' ','+')), 'utf-8');
+  if (match) {
+    var cpte = '' + compte(u.query.q.replace(' ', '+').replace(',', '.'));
+    this.res.end(cpte.replace('.', ','), 'utf-8');
     return;
   }
   answer(u.query.q, this.res);
@@ -81,4 +82,4 @@ var server = http.createServer(function(req, res) {
   console.log("Listening ...");
 });
 
-module.exports=server;
+module.exports = server;
