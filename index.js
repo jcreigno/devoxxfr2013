@@ -23,8 +23,9 @@ var answer = function(q, res) {
 };
 
 var compte = function(match) {
-  console.log(match);
-  return Parser.evaluate(match, {});
+  var res =  Parser.evaluate(match, {});
+  console.log(match + ' = ' + res);
+  return res;
 };
 
 var router = new director.http.Router();
@@ -56,7 +57,6 @@ router.get('/scalaskel/change/:value', function(value) {
   });
   var result = scalaskel.change(value);
   var r = JSON.stringify(result);
-  //console.log('Voici les changes posssibles pour %d cents : "%s"', value, r);
   this.res.end(r, 'utf-8');
 });
 
