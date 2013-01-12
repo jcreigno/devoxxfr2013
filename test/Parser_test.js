@@ -32,5 +32,11 @@ vows.describe('L\'evaluateur d\'expression arithmetiques').addBatch({
     'donne 6' : function(topic){
       assert.strictEqual(topic, 6);
     }
+  },
+  'l\'expresion (1+2+3+4+5+6+7+8+9+10)*2':{
+    topic : Parser.evaluate('(1+2+3+4+5+6+7+8+9+10)*2',{}),
+    'donne 110' : function(topic){
+      assert.strictEqual(topic, 110);
+    }
   }
 }).export(module);

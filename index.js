@@ -23,6 +23,7 @@ var answer = function(q, res) {
 };
 
 var compte = function(match) {
+  console.log(match);
   return Parser.evaluate(match, {});
 };
 
@@ -39,8 +40,10 @@ router.get('/', function() {
   }
   var match = /[0-9]/.exec(u.query.q);
   if (match) {
-    var cpte = '' + compte(u.query.q.replace(' ', '+').replace(',', '.'));
-    this.res.end(cpte.replace('.', ','), 'utf-8');
+    var input = u.query.q.split(' ').join('+');
+    input = input.split(',').join('.');
+    var cpte = '' + compte(input);
+    this.res.end(cpte.split('.').join(','), 'utf-8');
     return;
   }
   answer(u.query.q, this.res);
