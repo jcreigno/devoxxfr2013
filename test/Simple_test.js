@@ -70,7 +70,7 @@ var questions = {
   '3/3': '1',
   '(1+2)*2': '6',
   '(1+2)/2': '1,5',
-  '(1+2+3+4+5+6+7+8+9+10)*2' : 110
+  '(1+2+3+4+5+6+7+8+9+10)*2': 110
 };
 
 
@@ -98,13 +98,14 @@ vows.describe('Le serveur "Code Story"').addBatch({
 }).addBatch(createQuestionBatch()).addBatch({
   'reçoit le premier enoncé en post': {
     topic: function() {
-      apiTest.post('/enonce/1', "super secret markdown.", this.callback);
+      apiTest.post('/enonce/test', "super secret markdown.", this.callback);
     },
+    'et répondre un code 201': assertStatus(201),
     'et ne répond rien': assertEmptyBody(),
-    teardown: function () {
-	server.close(function(){
-		console.log('server closed');
-	});
+    teardown: function() {
+      server.close(function() {
+        console.log('server closed');
+      });
     }
 
   }

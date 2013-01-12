@@ -1,6 +1,8 @@
 var http = require('http'),
   url = require('url'),
+  path = require('path'),
   director = require('director'),
+  filed = require('filed'),
   Parser = require('./lib/Parser').Parser,
   Scalaskel = require('./lib/Scalaskel');
 
@@ -61,7 +63,14 @@ router.get('/scalaskel/change/:value', function(value) {
 });
 
 
-router.post('/enonce/:id', function() {
+router.post('/enonce/:id', function(id) {
+  this.req.pipe(filed(path.join(__dirname,'enonce-' + id +'.md')));
+  this.res.writeHead(201);
+  console.log(this.req.body);
+  this.res.end();
+});
+router.get('/enonce/:id', function(id) {
+  filed(path.join(__dirname,'enonce-' + id +'.md')).pipe(this.res);
   this.res.writeHead(201);
   console.log(this.req.body);
   this.res.end();
