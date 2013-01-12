@@ -71,9 +71,6 @@ router.post('/enonce/:id', function(id) {
 });
 router.get('/enonce/:id', function(id) {
   filed(path.join(__dirname,'enonce-' + id +'.md')).pipe(this.res);
-  this.res.writeHead(201);
-  console.log(this.req.body);
-  this.res.end();
 });
 
 var server = http.createServer(function(req, res) {
