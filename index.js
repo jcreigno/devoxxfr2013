@@ -26,7 +26,7 @@ var answer = function(q, res) {
 
 var compte = function(match) {
   var res = Parser.evaluate(match, {});
-  res = (typeof res === 'object')?res.toPlainString():''+res;
+  res = (typeof res === 'object')?res.toPlainString().replace(/([0]+)$/g,''):''+res;
   return res;
 };
 
