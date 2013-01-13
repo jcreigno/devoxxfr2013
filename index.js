@@ -25,8 +25,8 @@ var answer = function(q, res) {
 };
 
 var compte = function(match) {
-  var res =  Parser.evaluate(match, {});
-  console.log(match + ' = ' + res);
+  var res = Parser.evaluate(match, {});
+  res = (typeof res === 'object')?res.toPlainString():''+res;
   return res;
 };
 
@@ -45,7 +45,7 @@ router.get('/', function() {
   if (match) {
     var input = u.query.q.split(' ').join('+');
     input = input.split(',').join('.');
-    var cpte = '' + compte(input);
+    var cpte = compte(input);
     this.res.end(cpte.split('.').join(','), 'utf-8');
     return;
   }
