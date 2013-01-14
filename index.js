@@ -84,8 +84,9 @@ router.post('/jajascript/optimize', function(){
   var input = JSON.parse(this.req.data);
   console.log(input);
   var result = new JaJascript(input).optimize();
+  result = JSON.stringify(result);
   console.log(result);
-  this.res.end(JSON.stringify(result), 'utf-8');
+  this.res.end(result, 'utf-8');
 });
 
 var server = http.createServer(function(req, res) {
