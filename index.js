@@ -85,7 +85,7 @@ router.post('/jajascript/optimize', function(){
 var server = http.createServer(function(req, res) {
   req.chunks = [];
   req.on('data', function(chunk) {
-    console.log(chunk);
+    console.log(chunk.toString());
     req.chunks.push(chunk.toString());
   });
 
