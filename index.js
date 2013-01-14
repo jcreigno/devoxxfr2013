@@ -75,6 +75,11 @@ router.get('/enonce/:id', function(id) {
   filed(path.join(__dirname,'enonce-' + id +'.md')).pipe(this.res);
 });
 
+router.post('/jajascript/optimize', function()){
+  console.log(this.req.body);
+  JSON.parse(this.req.body);
+}
+
 var server = http.createServer(function(req, res) {
   req.chunks = [];
   req.on('data', function(chunk) {
