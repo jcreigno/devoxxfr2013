@@ -76,7 +76,9 @@ router.get('/enonce/:id', function(id) {
 });
 
 router.post('/jajascript/optimize', function(){
+  this.res.writeHead(200);
   console.log((typeof this.req.body) + ' : ' + typeof this.req.body);
+  this.res.end();
 });
 
 var server = http.createServer(function(req, res) {
