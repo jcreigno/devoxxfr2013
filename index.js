@@ -5,7 +5,8 @@ var http = require('http'),
   director = require('director'),
   filed = require('filed'),
   Parser = require('./lib/Parser').Parser,
-  Scalaskel = require('./lib/Scalaskel');
+  Scalaskel = require('./lib/Scalaskel'),
+  JaJascript = require('./lib/JaJascript');
 
 var questions = {
   'Quelle est ton adresse email': 'jerome.creignou@gmail.com',
@@ -77,16 +78,17 @@ router.get('/enonce/:id', function(id) {
 });
 
 router.post('/jajascript/optimize', function(){
-  this.res.writeHead(200);JSON.parse()
-  console.log((typeof this.req.body) + ' : ' + util.inspect(this.req.body,true));
-  this.res.end();
+  this.res.writeHead(200, {
+    'Content-Type': 'application/json'
+  });
+  var result = new JaJascript(JSON.parse(this.req.data)).optimize();
+  this.res.end(JSON.stringify(result), 'utf-8');
 });
 
 var server = http.createServer(function(req, res) {
-  req.chunks = [];
+  req.data = '';
   req.on('data', function(chunk) {
-    console.log(chunk.toString());
-    req.chunks.push(chunk.toString());
+    req.data += chunk.toString();
   });
 
   router.dispatch(req, res, function(err) {

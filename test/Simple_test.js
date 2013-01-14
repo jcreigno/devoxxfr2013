@@ -71,9 +71,8 @@ var questions = {
   '(1+2)*2': '6',
   '(1+2)/2': '1,5',
   '(1+2+3+4+5+6+7+8+9+10)*2': 110,
-  '((1,1+2)+3,14+4+(5+6+7)+(8+9+10)*4267387833344334647677634)/2*553344300034334349999000':
-    '31878018903828899277492024491376690701584023926880,00',
-  '(((1,1+2)+3,14+4+(5+6+7)+(8+9+10)*4267387833344334647677634)/2*553344300034334349999000)/31878018903828899277492024491376690701584023926880':'1,00',
+  '((1,1+2)+3,14+4+(5+6+7)+(8+9+10)*4267387833344334647677634)/2*553344300034334349999000': '31878018903828899277492024491376690701584023926880,00',
+  '(((1,1+2)+3,14+4+(5+6+7)+(8+9+10)*4267387833344334647677634)/2*553344300034334349999000)/31878018903828899277492024491376690701584023926880': '1,00',
   'As tu passe une bonne nuit malgre les bugs de l etape precedente(PAS_TOP/BOF/QUELS_BUGS)': 'PAS_TOP',
   'As tu bien recu le second enonce(OUI/NON)': 'OUI'
 };
@@ -106,13 +105,22 @@ vows.describe('Le serveur "Code Story"').addBatch({
       apiTest.post('/enonce/test', "super secret markdown.", this.callback);
     },
     'et répondre un code 201': assertStatus(201),
-    'et ne répond rien': assertEmptyBody(),
+    'et ne répond rien': assertEmptyBody()
+  }
+}).addBatch({
+  'reçoit une requete d\'optimisation jajascript': {
+    topic: function() {
+      apiTest.post('/jajascript/optimize', '[{ "VOL": "MONAD42","DEPART": 0,"DUREE": 5, "PRIX": 10},'
+        + '{"VOL": "META18","DEPART": 3,"DUREE": 7,"PRIX": 14},'
+        + '{"VOL": "LEGACY01","DEPART": 5,"DUREE": 9,"PRIX": 8},'
+        + '{"VOL": "YAGNI17","DEPART": 5,"DUREE": 9,"PRIX": 7}]', this.callback);
+    },
+    'et répondre un code 200': assertStatus(200),
+    'et repond la route la plus rentable': assertResultBody('{"gain":18,"path":["MONAD42","LEGACY01"]}'),
     teardown: function() {
       server.close(function() {
         console.log('server closed');
       });
     }
-
   }
-
 }).export(module);
