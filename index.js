@@ -81,7 +81,9 @@ router.post('/jajascript/optimize', function(){
   this.res.writeHead(200, {
     'Content-Type': 'application/json'
   });
-  var result = new JaJascript(JSON.parse(this.req.data)).optimize();
+  var input = JSON.parse(this.req.data);
+  console.log(input);
+  var result = new JaJascript(input).optimize();
   this.res.end(JSON.stringify(result), 'utf-8');
 });
 
