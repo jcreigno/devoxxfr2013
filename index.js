@@ -1,5 +1,6 @@
 var http = require('http'),
   url = require('url'),
+  util = require('util'),
   path = require('path'),
   director = require('director'),
   filed = require('filed'),
@@ -13,7 +14,8 @@ var questions = {
   'Es tu pret a recevoir une enonce au format markdown par http post(OUI/NON)': 'OUI',
   'Est ce que tu reponds toujours oui(OUI/NON)': 'NON',
   'As tu bien recu le premier enonce(OUI/NON)': 'OUI',
-  'As tu passe une bonne nuit malgre les bugs de l etape precedente(PAS_TOP/BOF/QUELS_BUGS)': 'PAS_TOP'
+  'As tu passe une bonne nuit malgre les bugs de l etape precedente(PAS_TOP/BOF/QUELS_BUGS)': 'PAS_TOP',
+  'As tu bien recu le second enonce(OUI/NON)': 'OUI'
 };
 
 var answer = function(q, res) {
@@ -26,12 +28,6 @@ var answer = function(q, res) {
 };
 
 var compte = function(match) {
-  if(match=='((1.1+2)+3.14+4+(5+6+7)+(8+9+10)*4267387833344334647677634)/2*553344300034334349999000'){
-    return '31878018903828899277492024491376690701584023926880'; 
-  }
-  if(match=='(((1.1+2)+3.14+4+(5+6+7)+(8+9+10)*4267387833344334647677634)/2*553344300034334349999000)/31878018903828899277492024491376690701584023926880'){
-    return '1';
-  }
   var res = Parser.evaluate(match, {});
   res = (typeof res === 'object')?res.toPlainString():''+res;
   return res;
@@ -78,6 +74,12 @@ router.post('/enonce/:id', function(id) {
 });
 router.get('/enonce/:id', function(id) {
   filed(path.join(__dirname,'enonce-' + id +'.md')).pipe(this.res);
+});
+
+router.post('/jajascript/optimize', function(){
+  this.res.writeHead(200);
+  console.log((typeof this.req.body) + ' : ' + util.inspect(body.req.body,true));
+  this.res.end();
 });
 
 var server = http.createServer(function(req, res) {
