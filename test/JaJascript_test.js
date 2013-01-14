@@ -39,5 +39,9 @@ vows.describe('L\'entreprise location JaJascript de Martin O.').addBatch({
       "PRIX": 7
     }]).optimize(),
     'on répond { gain: 18, path: [ \'MONAD42\', \'LEGACY01\' ] }': assertResult(18, ["MONAD42", "LEGACY01"])
+  },
+  'avec le premier exemple {"VOL": "AF514", "DEPART":0, "DUREE":5, "PRIX": 10}': {
+    topic: JaJascript([ {"VOL": "AF514", "DEPART":0, "DUREE":5, "PRIX": 10}]).optimize(),
+    'on répond AF514 ': assertResult(10, ["AF514"])
   }
 }).export(module);
