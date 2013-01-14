@@ -78,13 +78,14 @@ router.get('/enonce/:id', function(id) {
 });
 
 router.post('/jajascript/optimize', function(){
-  this.res.writeHead(200, {
-    'Content-Type': 'application/json'
-  });
   var input = JSON.parse(this.req.data);
   console.log(input);
   var result = new JaJascript(input).optimize();
   result = JSON.stringify(result);
+  this.res.writeHead(200, {
+    'Content-Type': 'application/json',
+    'Content-Length' : result.length
+  });
   console.log(result);
   this.res.end(result, 'utf-8');
 });
