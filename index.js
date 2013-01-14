@@ -77,7 +77,7 @@ router.get('/enonce/:id', function(id) {
 });
 
 router.post('/jajascript/optimize', function(){
-  this.res.writeHead(200);
+  this.res.writeHead(200);JSON.parse()
   console.log((typeof this.req.body) + ' : ' + util.inspect(this.req.body,true));
   this.res.end();
 });
@@ -85,6 +85,7 @@ router.post('/jajascript/optimize', function(){
 var server = http.createServer(function(req, res) {
   req.chunks = [];
   req.on('data', function(chunk) {
+    console.log(chunk);
     req.chunks.push(chunk.toString());
   });
 
