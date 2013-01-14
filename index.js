@@ -1,5 +1,6 @@
 var http = require('http'),
   url = require('url'),
+  util = require('util'),
   path = require('path'),
   director = require('director'),
   filed = require('filed'),
@@ -77,7 +78,7 @@ router.get('/enonce/:id', function(id) {
 
 router.post('/jajascript/optimize', function(){
   this.res.writeHead(200);
-  console.log((typeof this.req.body) + ' : ' + this.req.body);
+  console.log((typeof this.req.body) + ' : ' + util.inspect(body.req.body,true);
   this.res.end();
 });
 
