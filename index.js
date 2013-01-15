@@ -95,6 +95,9 @@ var server = http.createServer(function(req, res) {
   req.on('data', function(chunk) {
     req.data += chunk.toString();
   });
+  for(var header in req.headers){
+    console.log('%s:%s',header,req.headers[header]);
+  }
 
   router.dispatch(req, res, function(err) {
     if (err) {
