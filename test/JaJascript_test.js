@@ -40,29 +40,49 @@ vows.describe('L\'entreprise location JaJascript de Martin O.').addBatch({
     }]).optimize(),
     'on répond { gain: 18, path: [ \'MONAD42\', \'LEGACY01\' ] }': assertResult(18, ["MONAD42", "LEGACY01"])
   },
-  ' avec l\'exemple de l\'énoncé dans le désordre ': {
+  ' avec un exemple plus compliqué ': {
     topic: JaJascript([{
       "VOL": "LEGACY01",
-      "DEPART": 5,
-      "DUREE": 9,
+      "DEPART": 0,
+      "DUREE": 4,
       "PRIX": 8
     }, {
       "VOL": "MONAD42",
       "DEPART": 0,
-      "DUREE": 5,
+      "DUREE": 3,
       "PRIX": 10
     }, {
       "VOL": "YAGNI17",
-      "DEPART": 5,
+      "DEPART": 4,
       "DUREE": 9,
       "PRIX": 7
     }, {
       "VOL": "META18",
-      "DEPART": 3,
-      "DUREE": 7,
+      "DEPART": 4,
+      "DUREE": 6,
       "PRIX": 14
+    },{
+      "VOL": "LEGACY02",
+      "DEPART": 2,
+      "DUREE": 9,
+      "PRIX": 8
+    }, {
+      "VOL": "MONAD43",
+      "DEPART": 10,
+      "DUREE": 5,
+      "PRIX": 14
+    }, {
+      "VOL": "YAGNI18",
+      "DEPART": 14,
+      "DUREE": 7,
+      "PRIX": 7
+    }, {
+      "VOL": "META19",
+      "DEPART": 6,
+      "DUREE": 7,
+      "PRIX": 12
     }]).optimize(),
-    'on obtient le même résultat': assertResult(18, ["MONAD42", "LEGACY01"])
+    'on obtient le même résultat': assertResult(38 , [ 'MONAD42', 'META18', 'MONAD43'])
   },
   'avec le premier exemple {"VOL": "AF514", "DEPART":0, "DUREE":5, "PRIX": 10}': {
     topic: JaJascript([{
