@@ -16,7 +16,8 @@ var questions = {
   'Est ce que tu reponds toujours oui(OUI/NON)': 'NON',
   'As tu bien recu le premier enonce(OUI/NON)': 'OUI',
   'As tu passe une bonne nuit malgre les bugs de l etape precedente(PAS_TOP/BOF/QUELS_BUGS)': 'PAS_TOP',
-  'As tu bien recu le second enonce(OUI/NON)': 'OUI'
+  'As tu bien recu le second enonce(OUI/NON)': 'OUI',
+  'As tu copie le code de ndeloof(OUI/NON/JE_SUIS_NICOLAS)':'NON'
 };
 
 var answer = function(q, res) {
@@ -79,14 +80,16 @@ router.get('/enonce/:id', function(id) {
 
 router.post('/jajascript/optimize', function(){
   var input = JSON.parse(this.req.data);
-  console.log(this.req.data);
+  //console.log(this.req.data);
   var result = new JaJascript(input).optimize();
   result = JSON.stringify(result);
   this.res.writeHead(200, {
     'Content-Type': 'application/json',
     'Content-Length' : result.length
   });
-  console.log('resultat : ' + result);
+  setTimeout(function() {
+    console.log('resultat : ' + result);
+  }, 0);
   this.res.end(result, 'utf-8');
 });
 
@@ -95,9 +98,9 @@ var server = http.createServer(function(req, res) {
   req.on('data', function(chunk) {
     req.data += chunk.toString();
   });
-  for(var header in req.headers){
-    console.log('%s:%s',header,req.headers[header]);
-  }
+//  for(var header in req.headers){
+//    console.log('%s:%s',header,req.headers[header]);
+//  }
 
   router.dispatch(req, res, function(err) {
     if (err) {
