@@ -86,7 +86,7 @@ router.post('/jajascript/optimize', function(){
     'Content-Type': 'application/json',
     'Content-Length' : result.length
   });
-  console.log(result);
+  console.log('resultat : ' + result);
   this.res.end(result, 'utf-8');
 });
 
