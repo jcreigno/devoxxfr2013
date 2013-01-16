@@ -81,7 +81,9 @@ router.get('/enonce/:id', function(id) {
 router.post('/jajascript/optimize', function(){
   var input = JSON.parse(this.req.data);
   //console.log(this.req.data);
+  console.time('optimize');
   var result = new JaJascript(input).optimize();
+  console.timeEnd('optimize');
   result = JSON.stringify(result);
   this.res.writeHead(200, {
     'Content-Type': 'application/json',
