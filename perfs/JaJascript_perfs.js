@@ -16,6 +16,15 @@ function assertResult(gain, path) {
   };
 }
 
+function assertGain(gain) {
+  return function(topic) {
+    console.timeEnd("vows-optim");
+    console.log(topic);
+    assert.ok(topic);
+    assert.equal(topic.gain, gain);
+  };
+}
+
 var input = require('./10AF123.json');
 
 vows.describe('L\'entreprise location JaJascript de Martin O.').addBatch({
@@ -25,6 +34,6 @@ vows.describe('L\'entreprise location JaJascript de Martin O.').addBatch({
       return JaJascript(input).optimize()
     })(),
     'on répond {"gain":48,"path":["AF11","AF14","AF33","AF36","AF39","AF312","AF315","AF318","AF214","AF217"]}': 
-      assertResult(48, ["AF11","AF14","AF33","AF36","AF39","AF312","AF315","AF318","AF214","AF217"])
+      assertGain(48)
   }
 }).export(module);
