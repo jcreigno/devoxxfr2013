@@ -1,0 +1,5 @@
+[
+  {"VOL": "AF1", "DEPART":0, "DUREE":1, "PRIX": 2},
+  {"VOL": "AF2", "DEPART":4, "DUREE":1, "PRIX": 4},
+  {"VOL": "AF3", "DEPART":2, "DUREE":1, "PRIX": 6}
+]
