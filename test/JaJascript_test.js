@@ -15,7 +15,44 @@ function assertResult(gain, path) {
   };
 }
 
-vows.describe('L\'entreprise location JaJascript de Martin O.').addBatch({
+vows.describe('L\'entreprise location JaJascript de Martin O.')
+.addBatch({
+  'avec un nouvel objet Jajascript':{
+    topic: JaJascript([{
+      "VOL": "MONAD42",
+      "DEPART": 4,
+      "DUREE": 5,
+      "PRIX": 10
+    },{
+      "VOL": "MONAD43",
+      "DEPART": 4,
+      "DUREE": 5,
+      "PRIX": 10
+    }, {
+      "VOL": "META18",
+      "DEPART": 3,
+      "DUREE": 7,
+      "PRIX": 14
+    }, {
+      "VOL": "LEGACY01",
+      "DEPART": 5,
+      "DUREE": 9,
+      "PRIX": 8
+    }, {
+      "VOL": "YAGNI17",
+      "DEPART": 1,
+      "DUREE": 9,
+      "PRIX": 7
+    }]),
+    'les vols sont triés dans l\'objet par ordre de DEPART': function(topic){
+      var expected = [1,3,4,4,5];
+      for(var i=0;i<expected.length;i++){
+        assert.equal(topic.flights[i].DEPART, expected[i]);
+      }
+    }
+  }
+})
+.addBatch({
   ' avec l\'exemple de l\'énoncé ': {
     topic: JaJascript([{
       "VOL": "MONAD42",
