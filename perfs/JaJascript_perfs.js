@@ -1,7 +1,7 @@
 var vows = require('vows'),
   assert = require("assert"),
   _ = require("underscore"),
-  JaJascript = require('../lib/JaJascript');
+  JaJascript = require('../lib/JaJascript2');
 
 function assertResult(gain, path) {
   return function(topic) {

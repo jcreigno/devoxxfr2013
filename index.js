@@ -6,7 +6,7 @@ var http = require('http'),
   filed = require('filed'),
   Parser = require('./lib/Parser').Parser,
   Scalaskel = require('./lib/Scalaskel'),
-  JaJascript = require('./lib/JaJascript');
+  JaJascript = require('./lib/JaJascript2');
 
 var questions = {
   'Quelle est ton adresse email': 'jerome.creignou@gmail.com',
