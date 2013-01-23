@@ -31,8 +31,8 @@ var answer = function(q, res) {
 
 var compte = function(match) {
   var res = Parser.evaluate(match, {});
-  res = (typeof res === 'object')?res.toPlainString():''+res;
-  return res;
+  res = res.stripTrailingZeros();
+  return res.toPlainString();
 };
 
 var router = new director.http.Router();
@@ -80,12 +80,16 @@ router.get('/enonce/:id', function(id) {
 
 router.post('/jajascript/optimize', function(){
   var input = JSON.parse(this.req.data);
+  //console.log(this.req.data);
   var result = new JaJascript(input).optimize();
   result = JSON.stringify(result);
   this.res.writeHead(200, {
     'Content-Type': 'application/json',
     'Content-Length' : result.length
   });
+  setTimeout(function() {
+    console.log('resultat : ' + result);
+  }, 0);
   this.res.end(result, 'utf-8');
 });
 
