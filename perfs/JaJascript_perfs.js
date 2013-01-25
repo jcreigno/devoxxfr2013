@@ -6,7 +6,7 @@ var vows = require('vows'),
 function assertResult(gain, path) {
   return function(topic) {
     console.timeEnd("vows-optim");
-    console.log(topic);
+    //console.log(topic);
     assert.ok(topic);
     assert.equal(topic.gain, gain);
     assert.equal(topic.path.length, path.length);
@@ -19,20 +19,17 @@ function assertResult(gain, path) {
 function assertGain(gain) {
   return function(topic) {
     console.timeEnd("vows-optim");
-    console.log(topic);
+    //console.log(topic);
     assert.ok(topic);
     assert.equal(topic.gain, gain);
   };
 }
 
-var input = require('./10AF123.json');
-var sample = require('./sample.json');
-
 vows.describe('L\'entreprise location JaJascript de Martin O.').addBatch({
   ' test de performances avec une entrée importante ': {
     topic: (function(){
       console.time("vows-optim");
-      return JaJascript(input).optimize()
+      return JaJascript(require('./10AF123.json')).optimize()
     })(),
     'on répond {"gain":48,"path":["AF11","AF14","AF33","AF36","AF39","AF312","AF315","AF318","AF214","AF217"]}': 
       assertGain(48)
@@ -40,7 +37,7 @@ vows.describe('L\'entreprise location JaJascript de Martin O.').addBatch({
   ' test de performances avec une vrai requête ': {
     topic: (function(){
       console.time("vows-optim");
-      return JaJascript(sample).optimize()
+      return JaJascript(require('./sample.json')).optimize()
     })(),
     'on trouve un gain 167':
       assertResult(167,
@@ -54,5 +51,21 @@ vows.describe('L\'entreprise location JaJascript de Martin O.').addBatch({
          "tired-rating-22", 
          "chubby-protein-48"]
       )
+  },
+  ' test de performances avec 700 vols ': {
+    topic: (function(){
+      console.time("vows-optim");
+      return JaJascript(require('./700.json')).optimize()
+    })(),
+    'on trouve {"gain":15535}': 
+      assertGain(15535)
+  },
+  ' test de performances avec 4000 vols ': {
+    topic: (function(){
+      console.time("vows-optim");
+      return JaJascript(require('./4000.json')).optimize()
+    })(),
+    'on trouve {"gain":15535}': 
+      assertGain(15535)
   }
 }).export(module);
