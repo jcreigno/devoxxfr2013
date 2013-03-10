@@ -57,7 +57,7 @@ vows.describe('Les groDessimaux de Scalaskel').addBatch({
     'est "[ {"foo": 6} ]': assertChange([{
       "foo": 6
     }]),
-    'la somme fait bien 6': assertSum(6)
+    'la somme est 6': assertSum(6)
   },
   'le change de 7 ': {
     topic: new Scalaskel().change(7),
@@ -66,7 +66,7 @@ vows.describe('Les groDessimaux de Scalaskel').addBatch({
     }, {
       "foo": 7
     }]),
-    'la somme fait bien 7': assertSum(7)
+    'la somme est 7': assertSum(7)
   },
   'le change de 11 ': {
     topic: new Scalaskel().change(11),
@@ -78,7 +78,7 @@ vows.describe('Les groDessimaux de Scalaskel').addBatch({
     }, {
       "foo": 11
     }]),
-    'la somme fait bien 11': assertSum(11)
+    'la somme est 11': assertSum(11)
   },
   'le change de 19 ': {
     topic: new Scalaskel().change(19),
@@ -98,7 +98,7 @@ vows.describe('Les groDessimaux de Scalaskel').addBatch({
     }, {
       "foo": 19
     }]),
-    'la somme fait bien 19': assertSum(19)
+    'la somme est 19': assertSum(19)
   },
   'le change de 21 ': {
     topic: new Scalaskel().change(21),
@@ -122,10 +122,10 @@ vows.describe('Les groDessimaux de Scalaskel').addBatch({
     }, {
       "foo": 21
     }]),
-    'la somme fait bien 21': assertSum(21)
+    'la somme est 21': assertSum(21)
   },
   'le change de 47 ': {
     topic: new Scalaskel().change(47),
-    'la somme des chacune des décomposition fait bien 47': assertSum(47)
+    'la somme de chacune des décompositions est 47': assertSum(47)
   }
 }).export(module);
