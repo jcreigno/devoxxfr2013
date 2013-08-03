@@ -77,7 +77,6 @@ var questions = {
   'As tu passe une bonne nuit malgre les bugs de l etape precedente(PAS_TOP/BOF/QUELS_BUGS)': 'PAS_TOP',
   'As tu bien recu le second enonce(OUI/NON)': 'OUI',
   'Veux+tu+encore+jouer(OUI|NON)':'OUI'
-  
 };
 
 
