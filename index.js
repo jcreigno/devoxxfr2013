@@ -19,7 +19,7 @@ var questions = {
   'As tu bien recu le second enonce(OUI/NON)': 'OUI',
   'As tu copie le code de ndeloof(OUI/NON/JE_SUIS_NICOLAS)':'NON',
   'Souhaites-tu-participer-a-la-suite-de-Code-Story(OUI/NON)': 'NON',
-  'Veux tu encore jouer(OUI|NON)':'OUI'
+  'Veux tu encore jouer(OUI|NON)':'NON'
 };
 
 var answer = function(q, res) {
